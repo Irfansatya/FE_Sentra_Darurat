@@ -1,18 +1,30 @@
-import { Component } from 'solid-js';
-import { Link } from '@solidjs/router';
+import { createSignal } from 'solid-js';
 
-const Home: Component = () => {
+export default function Home() {
+  const [count, setCount] = createSignal(0);
+
   return (
-    <div>
-      <h1>Home Page</h1>
-      <nav>
-        <ul>
-          <li><Link href="/login">Login</Link></li>
-          <li><Link href="/about">About</Link></li>
-        </ul>
-      </nav>
-    </div>
-  );
-};
+    <section class="bg-gray-100 text-gray-700 p-8">
+      <h1 class="text-2xl font-bold">Home</h1>
+      <p class="mt-4">This is the home page.</p>
 
-export default Home;
+      <div class="flex items-center space-x-2">
+        <button
+          class="border rounded-lg px-2 border-gray-900"
+          onClick={() => setCount(count() - 1)}
+        >
+          -
+        </button>
+
+        <output class="p-10px">Count: {count()}</output>
+
+        <button
+          class="border rounded-lg px-2 border-gray-900"
+          onClick={() => setCount(count() + 1)}
+        >
+          +
+        </button>
+      </div>
+    </section>
+  );
+}
