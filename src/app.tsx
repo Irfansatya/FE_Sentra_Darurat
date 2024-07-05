@@ -1,6 +1,5 @@
 import type { Component } from 'solid-js';
 import { Link, useRoutes, useLocation, A } from '@solidjs/router';
-
 import { routes } from './routes';
 
 const App: Component = () => {
@@ -29,6 +28,11 @@ const App: Component = () => {
           <li class="py-2 px-4">
             <Link href="/register" class="no-underline hover:underline">
               Buat Akun
+            </Link>
+          </li>
+          <li class="py-2 px-4">
+            <Link href="/admin" class="no-underline hover:underline">
+              Admin
             </Link>
           </li>
           <li class="text-sm flex items-center space-x-1 ml-auto">

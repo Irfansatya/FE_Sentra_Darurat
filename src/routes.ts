@@ -3,7 +3,6 @@ import type { RouteDefinition } from '@solidjs/router';
 
 import Home from './pages/home';
 import AboutData from './pages/about.data';
-import Login from './Login';
 
 export const routes: RouteDefinition[] = [
   {
@@ -24,6 +23,11 @@ export const routes: RouteDefinition[] = [
   {
     path: '/register', // Ensure this path is all lowercase
     component: lazy(() => import('./Register')), // Ensure the path matches the file name
+  },
+
+  {
+    path: '/admin', // Ensure this path is all lowercase
+    component: lazy(() => import('./admin')), // Ensure the path matches the file name
   },
 
   {

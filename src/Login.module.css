@@ -1,37 +1,95 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
-
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .container {
   display: flex;
   height: 100vh;
-  background-image: url('./image/backgroundlogin.png');
+  background-image: url('./image/background.svg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  position: relative;
+}
+
+.logoContainer {
+  position: absolute;
+  top: 20px;
+  left: 78px;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.logo {
+  width: 20px; /* Adjust size as needed */
+  margin-top: 11px;
+  margin-right: 9px;
+}
+
+.appName {
+  font-weight: 700; /* Make the app name bold */
+  font-size: 1.02rem; /* Match the font size of the carousel title */
+  margin-top: 12px;
 }
 
 .left {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  align-items: left;
   color: white;
   padding: 2rem;
-  background: rgba(0, 0, 0, 0.5);
 }
 
 .right {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  margin-right: 13px;
   color: white;
-  background-color: rgba(0, 0, 0, 0.7);
+  position: relative;
+  padding-top: 3rem; /* Adjust this value to move the carousel down or up */
+}
+
+.right h2 {
+  font-size: 1.5rem; /* Smaller font size */
+  margin-bottom: 0.5rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.right p {
+  font-size: 0.875rem; /* Smaller font size */
+  font-weight: 500;
+  text-align: center;
+  max-width: 500px;
+  color: #A0A0A4;
+}
+
+/* Styles for carousel indicators */
+.indicators {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.3rem;
+}
+
+.indicator,
+.activeIndicator {
+  width: 7.2px; /* Width for indicators */
+  height: 7.2px; /* Height for indicators */
+  border-radius: 50%;
+  background-color: #474141;
+  margin: 0 5px; /* Adjust margin as needed */
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.activeIndicator {
+  background-color: #FB1616; /* Color for active indicator */
+  transform: scale(1.4); /* Scale the active indicator to make it bigger */
 }
 
 h1 {
@@ -56,29 +114,58 @@ form {
   max-width: 400px;
 }
 
+.label {
+  margin-bottom: 0.5rem;
+  margin-top: 22px;
+  margin-left: 45px;
+  font-size: 0.9rem;
+  font-weight: 450;
+  color: white;
+}
+
+.labelpassword {
+  margin-bottom: 0.5rem;
+  margin-top: 0px;
+  margin-left: 45px;
+  font-size: 0.9rem;
+  font-weight: 450;
+  color: white;
+}
+
+.masuk {
+  font-weight: 650; /* Make the app name bold */
+  font-size: 1.4rem;
+  margin-left: 45px;
+  margin-top: 50px;
+}
+
 .input {
   padding: 0.5rem;
   margin-bottom: 1rem;
-  border: 1px solid #333;
+  margin-left: 45px;
+  border: 1px solid #313444;
   border-radius: 5px;
-  background-color: #222;
+  background-color: #26293A;
   color: white;
+  font-size: 0.9rem;
+  width: 465px;
 }
 
 .passwordContainer {
   position: relative;
+  width: 465px; /* Pastikan container memiliki lebar tetap yang sama dengan input */
 }
-  
+
 .passwordContainer .input {
-  width: 100%;
-  padding-right: 2.5rem; /* Space for the eye icon */
+  width: 100%; /* Gunakan lebar 100% untuk mengisi container */
+  padding-right: 3rem; /* Ruang untuk ikon mata */
 }
-  
+
 .togglePassword {
   position: absolute;
-  top: 37%;
-  right: 0.5rem;
-  transform: translateY(-50%);
+  top: 37%; /* Posisikan di tengah secara vertikal */
+  right: 0; /* Posisikan di kanan tanpa jarak */
+  transform: translate(165%, -50%); /* Pindahkan ikon lebih ke kanan */
   cursor: pointer;
 }
 
@@ -90,11 +177,17 @@ form {
 .options {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  align-items: center;
+  margin-bottom: 1.2rem;
+  margin-left: 45px;
+  font-size: 0.85rem;
+  font-weight: 450;
+  width: 465px;
 }
 
 .forgotPassword {
   color: #FF6161;
+  margin-left: auto;
 }
 
 .loginButton {
@@ -104,11 +197,18 @@ form {
   background-color: #FB1616;
   color: white;
   cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-left: 45px;
+  width: 465px;
 }
 
 .socialLogin {
   margin-top: 1rem;
-  text-align: center;
+  margin-right: 50px;
+  font-size: 0.8rem;
+  color: #8E9095;
+  font-weight: 500;
 }
 
 .socialIcons {
@@ -120,24 +220,62 @@ form {
 
 .socialButton {
   display: flex;
-  align-items: center;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
   padding: 0.5rem;
   border: 1px solid #464957;
   border-radius: 5px;
   background-color: #26293A;
   color: white;
   cursor: pointer;
-  width: 123px;
-  height: 38px; 
+  width: 144px;
+  height: 36px; 
   margin: -1px;
 }
 
 .socialIcon {
-  width: 20px;
-  height: 20px;
-  margin-right: 0.5rem;
+  width: 21px;
+  height: 21px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.akun {
+  color: #FFFFFF;
+  font-size: 0.8rem;
+  margin-top: 23px;
+  font-weight: 420;
+  margin-right: 50px;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-top: 9px; /* Sesuaikan sesuai kebutuhan */
+  margin-bottom: 20px; /* Sesuaikan sesuai kebutuhan */
+}
+
+.separator::before {
+  content: '';
+  border-bottom: 1px solid #8E9095; /* Gaya dan warna garis */
+  margin-left: 45px;
+  margin-right: 15px;
+  width: 150px;
+}
+.separator::after {
+  content: '';
+  border-bottom: 1px solid #8E9095; /* Gaya dan warna garis */
+  margin-left: 15px;
+  width: 150px;
+}
+
+.separator span {
+  white-space: nowrap; /* Mencegah teks melingkar ke baris berikutnya */
 }
 
 .createAccount {
   color: #FF6161;
+  font-weight: 500;
 }
