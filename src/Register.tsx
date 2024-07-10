@@ -42,20 +42,27 @@ const Register: Component = () => {
       return;
     }
     const hashedPassword = CryptoJS.SHA256(password()).toString();
-    const userData = {
+    const newUser = {
       name: name(),
       email: email(),
       password: hashedPassword,
       phone: phone(),
     };
-    localStorage.setItem('userData', JSON.stringify(userData));
+
+    // Ambil data pengguna yang telah terdaftar sebelumnya
+    let existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
+    existingUsers.push(newUser);
+
+    // Simpan kembali ke localStorage
+    localStorage.setItem('users', JSON.stringify(existingUsers));
+
     setShowPopup(true);
     setErrorMessage('Pendaftaran Akun Berhasil Silahkan Masuk Terlebih Dahulu !!!');
     setTimeout(() => {
       setShowPopup(false);
       navigate('/login');
     }, 3000);
-  }; 
+  };
 
   // Hide popup after 5 seconds
   createEffect(() => {
@@ -78,11 +85,11 @@ const Register: Component = () => {
 
   return (
     <div class={styles.container}>
-        <div class={styles.logoContainer}>
-          <img src={logo} alt="Sentra Darurat Logo" class={styles.logo} />
-          <h1 class={styles.appName}>Sentra Darurat</h1>
-        </div>
-        <div class={styles.left}>
+      <div class={styles.logoContainer}>
+        <img src={logo} alt="Sentra Darurat Logo" class={styles.logo} />
+        <h1 class={styles.appName}>Sentra Darurat</h1>
+      </div>
+      <div class={styles.left}>
         <label class={styles.buat}>Buat Akun Anda.</label>
         <form onSubmit={handleRegister}>
           <label class={styles.labelnama}>Nama Lengkap</label>
@@ -152,4 +159,4 @@ const Register: Component = () => {
   );
 };
 
-export default Register;
+export default Register;
