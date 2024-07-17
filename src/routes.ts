@@ -3,18 +3,18 @@ import type { RouteDefinition } from '@solidjs/router';
 
 export const routes: RouteDefinition[] = [
   {
-    path: '/homepage', // Ensure this path is all lowercase
-    component: lazy(() => import('./homepage')), // Ensure the path matches the file name
+    path: '/', // Ensure this path is all lowercase
+    component: lazy(() => import('./landingpage')), // Ensure the path matches the file name
   },
 
   {
-    path: '/login', // Ensure this path is all lowercase
-    component: lazy(() => import('./Login')), // Ensure the path matches the file name
+    path: '/loginpopup', // Ensure this path is all lowercase
+    component: lazy(() => import('./LoginPopUp')), // Ensure the path matches the file name
   },
 
   {
-    path: '/register', // Ensure this path is all lowercase
-    component: lazy(() => import('./Register')), // Ensure the path matches the file name
+    path: '/registerpopup', // Ensure this path is all lowercase
+    component: lazy(() => import('./RegisterPopUp')), // Ensure the path matches the file name
   },
 
   {

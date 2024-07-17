@@ -1,12 +1,15 @@
+// admin.tsx
+
 import { Component, createSignal } from 'solid-js';
 import AgGridSolid from 'ag-grid-solid';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import styles from './admin.module.css';
+import { sha256 } from 'js-sha256'; // Pastikan Anda telah menginstal js-sha256
 
 const Admin: Component = () => {
-  const [gridApi, setGridApi] = createSignal(null);
-  const [gridColumnApi, setGridColumnApi] = createSignal(null);
+  let gridApi;
+  let gridColumnApi;
   const [editingUser, setEditingUser] = createSignal(null);
   const [rowData, setRowData] = createSignal([]);
 
@@ -15,6 +18,36 @@ const Admin: Component = () => {
     { headerName: "Email", field: "email", sortable: true, filter: true },
     { headerName: "Password", field: "password", sortable: true, filter: true },
     { headerName: "No Telp", field: "phone", sortable: true, filter: true },
+    {
+      headerName: "Actions",
+      field: "actions",
+      cellRenderer: (params) => {
+        const handleEditButtonClick = () => {
+          handleEdit(params.data);
+        };
+
+        const handleDeleteButtonClick = () => {
+          handleDelete(params.data);
+        };
+
+        return (
+          <div>
+            <button
+              onClick={handleEditButtonClick}
+              class={styles.editButton}
+            >
+              Edit
+            </button>
+            <button
+              onClick={handleDeleteButtonClick}
+              class={styles.deleteButton}
+            >
+              Hapus
+            </button>
+          </div>
+        );
+      },
+    },
   ];
 
   const defaultColDef = {
@@ -25,15 +58,18 @@ const Admin: Component = () => {
   };
 
   const onGridReady = params => {
-    setGridApi(params.api);
-    setGridColumnApi(params.columnApi);
+    gridApi = params.api;
+    gridColumnApi = params.columnApi;
 
     // Ambil data dari localStorage
     const userData = localStorage.getItem('users');
     if (userData) {
-      const data = JSON.parse(userData);
-      setRowData(data);
-      params.api.setRowData(data);
+      const rowData = JSON.parse(userData).map(user => ({
+        ...user,
+        password: sha256(user.password) // Enkripsi password
+      }));
+      setRowData(rowData);
+      gridApi.setRowData(rowData);
     }
   };
 
@@ -41,11 +77,18 @@ const Admin: Component = () => {
     setEditingUser(user);
   };
 
+  const handleDelete = (user) => {
+    const updatedUsers = rowData().filter(u => u.email !== user.email);
+    localStorage.setItem('users', JSON.stringify(updatedUsers));
+    setRowData(updatedUsers);
+    gridApi.setRowData(updatedUsers);
+  };
+
   const handleSave = () => {
     const updatedUsers = rowData().map(user => user.email === editingUser().email ? editingUser() : user);
     localStorage.setItem('users', JSON.stringify(updatedUsers));
     setRowData(updatedUsers);
-    gridApi().setRowData(updatedUsers);
+    gridApi.setRowData(updatedUsers);
     setEditingUser(null);
   };
 
@@ -59,9 +102,6 @@ const Admin: Component = () => {
           rowData={rowData()}
           onGridReady={onGridReady}
         />
-      </div>
-      <div class={styles.editButtonContainer}>
-        <button onClick={() => handleEdit(rowData()[0])}>Edit</button>
       </div>
       {editingUser() && (
         <div class={styles.editForm}>

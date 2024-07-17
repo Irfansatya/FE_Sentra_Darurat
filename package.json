@@ -23,6 +23,8 @@
     "ag-grid-community": "^32.0.0",
     "ag-grid-solid": "^31.1.1",
     "crypto-js": "^4.2.0",
+    "js-sha256": "^0.11.0",
+    "solid-app-router": "^0.4.2",
     "solid-js": "^1.8.11"
   }
 }
