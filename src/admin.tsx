@@ -1,5 +1,3 @@
-// admin.tsx
-
 import { Component, createSignal } from 'solid-js';
 import AgGridSolid from 'ag-grid-solid';
 import 'ag-grid-community/styles/ag-grid.css';

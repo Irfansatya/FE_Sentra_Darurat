@@ -4,7 +4,7 @@ import logoPopup from './image/logoPopup.svg';
 import showIcon from './image/showpassword.svg';
 import hideIcon from './image/hidepassword.svg';
 import close from './image/close.svg';
-import { sha256 } from 'js-sha256'; // Tambahkan impor ini
+import { sha256 } from 'js-sha256';
 
 const RegisterPopUp: Component<{ onClose: () => void; onSwitch: () => void; onRegister?: () => void; }> = (props) => {
   const [showPassword, setShowPassword] = createSignal(false);
@@ -31,12 +31,12 @@ const RegisterPopUp: Component<{ onClose: () => void; onSwitch: () => void; onRe
     document.addEventListener('click', handleClickOutside);
   });
 
-  const registerUser = () => { // Mengubah nama fungsi untuk menghindari konflik
-    const hashedPassword = sha256(password()); // Enkripsi password
+  const registerUser = () => {
+    const hashedPassword = sha256(password());
     const newUser = {
       name: fullName(),
       email: email(),
-      password: password(), // Simpan password yang sudah terenkripsi
+      password: password(),
       phone: phone()
     };
     
@@ -45,7 +45,7 @@ const RegisterPopUp: Component<{ onClose: () => void; onSwitch: () => void; onRe
     localStorage.setItem('users', JSON.stringify(users));
     
     if (props.onRegister) {
-      props.onRegister(); // Menampilkan pop-up login setelah registrasi jika prop onRegister ada
+      props.onRegister();
     }
   };
 
@@ -79,7 +79,7 @@ const RegisterPopUp: Component<{ onClose: () => void; onSwitch: () => void; onRe
           </div>
           <label for="phone">No. Telepon</label>
           <input type="tel" id="phone" placeholder="Masukkan no. telepon.." class={styles.inputField} value={phone()} onInput={(e) => setPhone(e.target.value)} />
-          <button type="button" class={styles.primaryButton} onClick={registerUser}>Daftar</button> {/* Ubah pemanggilan fungsi */}
+          <button type="button" class={styles.primaryButton} onClick={registerUser}>Daftar</button>
         </form>
         <p class={styles.sudahpunyaAkun}>Sudah memiliki akun? <label class={styles.masukKlik}><a onClick={props.onSwitch}>Masuk</a></label></p>
       </div>

@@ -1,5 +1,5 @@
 import { Component, createSignal, onCleanup, onMount } from 'solid-js';
-import { useNavigate } from '@solidjs/router'; // Mengimpor Navigate dan useNavigate
+import { useNavigate } from '@solidjs/router';
 import styles from './LoginPopUp.module.css';
 import logoPopup from './image/logoPopup.svg';
 import googleIcon from './image/google.svg';
@@ -12,7 +12,7 @@ const LoginPopUp: Component<{ onClose: () => void; onSwitch: () => void; }> = (p
   const [email, setEmail] = createSignal('');
   const [password, setPassword] = createSignal('');
   const [errorMessage, setErrorMessage] = createSignal('');
-  const navigate = useNavigate(); // Hook useNavigate untuk navigasi
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword());
@@ -33,9 +33,9 @@ const LoginPopUp: Component<{ onClose: () => void; onSwitch: () => void; }> = (p
   });
 
   const handleLogin = () => {
-    const users = JSON.parse(localStorage.getItem('users')) || []; // Ambil pengguna dari localStorage atau array kosong jika tidak ada
+    const users = JSON.parse(localStorage.getItem('users')) || [];
     const user = users.find(user => user.email === email() && user.password === password());
-  
+
     if (email() === 'admin@gmail.com' && password() === 'admin123') {
       navigate('/admin');
     } else if (user) {
@@ -44,7 +44,6 @@ const LoginPopUp: Component<{ onClose: () => void; onSwitch: () => void; }> = (p
       setErrorMessage('Email/Password yang anda masukkan salah');
     }
   };
-  
 
   return (
     <div class={styles.popupOverlay}>
