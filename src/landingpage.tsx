@@ -3,7 +3,6 @@ import logo from './image/logo.svg';
 import language from './image/language.svg';
 import arrowDown from './image/arrowDown.svg';
 import arrow from './image/arrow.svg';
-import gambar1 from './image/gambar1.svg';
 import kepolisian from './image/kepolisian.svg';
 import kemenkes from './image/kemenkes.svg';
 import damkar from './image/damkar.svg';
@@ -14,11 +13,23 @@ import arrowLihat from './image/arrowLihat.svg';
 import boxKepolisian from './image/boxKepolisian.svg';
 import boxAmbulans from './image/boxAmbulans.svg';
 import boxPemadam from './image/boxPemadam.svg';
+import boxKemensos from './image/boxKemensos.svg';
+import boxBasarnas from './image/boxBasarnas.svg';
+import boxListrik from './image/boxListrik.svg';
 import leftScroll from './image/leftScroll.svg';
 import rightScroll from './image/rightScroll.svg';
+import boxKepolisianHover from './image/boxKepolisianHover.svg';
+import boxAmbulansHover from './image/boxAmbulansHover.svg';
+import boxPemadamHover from './image/boxPemadamHover.svg';
+import boxKemensosHover from './image/boxKemensosHover.svg';
+import boxBasarnasHover from './image/boxBasarnasHover.svg';
+import boxListrikHover from './image/boxListrikHover.svg';
 import LoginPopUp from './LoginPopUp';
 import RegisterPopUp from './RegisterPopUp';
 import styles from './landingpage.module.css';
+import video1 from './animation/video1.mp4';
+import video2 from './animation/video2.mp4';
+import video3 from './animation/video3.mp4';
 
 const logos = [
   { src: kepolisian, alt: 'Kepolisian RI' },
@@ -29,46 +40,135 @@ const logos = [
   { src: pln, alt: 'PT. PLN (Persero)' },
 ];
 
-const duplicatedLogos = [...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos]; // Duplicate logos array
+const duplicatedLogos = [...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos];
+
+const boxImages = [
+  { src: boxKepolisian, hoverSrc: boxKepolisianHover },
+  { src: boxAmbulans, hoverSrc: boxAmbulansHover },
+  { src: boxPemadam, hoverSrc: boxPemadamHover },
+  { src: boxKemensos, hoverSrc: boxKemensosHover },
+  { src: boxBasarnas, hoverSrc: boxBasarnasHover },
+  { src: boxListrik, hoverSrc: boxListrikHover },
+];
 
 const LandingPage: Component = () => {
   const [activeNav, setActiveNav] = createSignal('Fitur');
   const [showLogin, setShowLogin] = createSignal(false);
   const [showRegister, setShowRegister] = createSignal(false);
   const [section, setSection] = createSignal(1);
-  const [currentIndex, setCurrentIndex] = createSignal(0);
+  const [currentVideo, setCurrentVideo] = createSignal(video1);
+  const [fadeOut, setFadeOut] = createSignal(false);
+  const [boxPosition, setBoxPosition] = createSignal(0);
+  const [activeIndex, setActiveIndex] = createSignal(0);
+  const boxCount = 6;
+  const boxesPerView = 3;
+  const boxWidth = 100 / boxesPerView;
+  const sectionCount = 3;
+  let isScrolling = false;
+  const videos = [video1, video2, video3];
+  let videoIndex = 0;
 
-  // Function to handle scroll event
-  const handleScroll = () => {
-    const scrollPosition = window.scrollY;
-    const section1Top = 0;
-    const section2Top = window.innerHeight;
-    const section3Top = 2 * window.innerHeight;
+  const changeVideo = () => {
+    setFadeOut(true);
 
-    // Determine which section is currently in view
-    if (scrollPosition < section2Top) {
-      setSection(1);
-    } else if (scrollPosition >= section2Top && scrollPosition < section3Top) {
-      setSection(2);
+    setTimeout(() => {
+      videoIndex = (videoIndex + 1) % videos.length;
+      setCurrentVideo(videos[videoIndex]);
+      setFadeOut(false);
+    }, 300); // Durasi animasi fade-out
+  };
+
+  createEffect(() => {
+    const interval = setInterval(() => {
+      changeVideo();
+    }, 5000); // Video duration + fade transition
+
+    return () => clearInterval(interval);
+  });
+
+  const debounceScroll = (func, wait) => {
+    let timeout;
+    return function (...args) {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        timeout = null;
+        func.apply(this, args);
+      }, wait);
+    };
+  };
+
+  const handleWheelScroll = (event) => {
+    if (isScrolling) return;
+    isScrolling = true;
+
+    if (event.deltaY > 0) {
+      if (section() < sectionCount) {
+        setSection((prev) => prev + 1);
+      }
     } else {
-      setSection(3);
+      if (section() > 1) {
+        setSection((prev) => prev - 1);
+      }
+    }
+
+    setTimeout(() => {
+      isScrolling = false;
+    }, 200);
+  };
+
+  let touchStartY = 0;
+  const handleTouchStart = (event) => {
+    touchStartY = event.touches[0].clientY;
+  };
+  const handleTouchMove = (event) => {
+    if (isScrolling) return;
+    isScrolling = true;
+
+    const touchEndY = event.touches[0].clientY;
+    if (touchStartY - touchEndY > 50) {
+      if (section() < sectionCount) {
+        setSection((prev) => prev + 1);
+      }
+    } else if (touchEndY - touchStartY > 50) {
+      if (section() > 1) {
+        setSection((prev) => prev - 1);
+      }
+    }
+
+    setTimeout(() => {
+      isScrolling = false;
+    }, 200);
+  };
+
+  const updateActiveNav = () => {
+    const scrollPosition = window.scrollY;
+    if (scrollPosition < window.innerHeight) {
+      setActiveNav('Fitur');
+    } else if (scrollPosition < 2 * window.innerHeight) {
+      setActiveNav('Layanan');
+    } else {
+      setActiveNav('Keunggulan');
     }
   };
 
-  // Effect to add scroll listener
   createEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('wheel', debounceScroll(handleWheelScroll, 200), { passive: false });
+    window.addEventListener('touchstart', handleTouchStart, { passive: false });
+    window.addEventListener('touchmove', debounceScroll(handleTouchMove, 200), { passive: false });
+    window.addEventListener('scroll', updateActiveNav);
 
-    // Cleanup function to remove scroll listener
+
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('wheel', debounceScroll(handleWheelScroll, 100));
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', debounceScroll(handleTouchMove, 100));
+      window.removeEventListener('scroll', updateActiveNav);
     };
   });
 
   const handleNavClick = (navItem) => {
     setActiveNav(navItem);
-  
-    // Mengatur posisi scroll berdasarkan section yang aktif
+
     if (navItem === 'Layanan') {
       setSection(2);
       window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
@@ -79,11 +179,25 @@ const LandingPage: Component = () => {
       setSection(4);
       window.scrollTo({ top: 3 * window.innerHeight, behavior: 'smooth' });
     } else {
-      setSection(1); // Default to section 1 for other nav items
+      setSection(1);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
+
+  const handleScrollLeft = () => {
+    setBoxPosition((prev) => Math.max(prev - 1, 0));
+  };
   
+  const handleScrollRight = () => {
+    setBoxPosition((prev) => Math.min(prev + 1, boxCount - boxesPerView));
+  };
+
+  createEffect(() => {
+    const centerIndex = Math.floor(boxesPerView / 2);
+    const newActiveIndex = Math.min(boxPosition() + centerIndex, boxCount - 1);
+    setActiveIndex(newActiveIndex);
+  });
+
   const toggleLogin = () => {
     setShowLogin(true);
     setShowRegister(false);
@@ -133,10 +247,10 @@ const LandingPage: Component = () => {
         </nav>
       </header>
       <main class={styles.mainContent}>
-        <div class={styles.section} style={{ transform: section() === 1 ? 'translateY(0)' : 'translateY(-100vh)' }}>
+        <div class={styles.section} style={{ transform: section() === 1 ? 'translateY(0)' : section() === 2 ? 'translateY(-100vh)' : 'translateY(-200vh)' }}>
           <div class={styles.textSection}>
-            <h1>Laporkan Situasi Darurat yang Terjadi Disekitar Anda</h1>
-            <p>Segera hubungi nomor layanan darurat yang anda butuhkan lalu kirimkan bukti atau detail situasi beserta foto <br />langsung dari lokasi kejadian.</p>
+            <h1>Laporkan Situasi <br />Darurat yang Terjadi <br />Disekitar Anda</h1>
+            <p>Segera hubungi nomor layanan darurat yang anda butuhkan <br />lalu kirimkan bukti atau detail situasi beserta foto <br />langsung dari lokasi kejadian.</p>
             <div class={styles.supportedBy}>
               <button class={styles.primaryButton} onClick={toggleLogin}>Mulai sekarang</button>
               <span class={styles.didukungOleh}>Didukung oleh</span>
@@ -152,39 +266,42 @@ const LandingPage: Component = () => {
               </div>
             </div>
           </div>
-          <div class={styles.imageSection}>
-            <img src={gambar1} alt="Kontak Cepat" />
+          <div class={styles.videoSection}>
+          <video src={currentVideo()} class={`${styles.video} ${fadeOut() ? styles.fadeOut : styles.fadeIn}`} autoplay loop muted />
           </div>
-          </div>
-        <div class={styles.section} style={{ transform: section() === 2 ? 'translateY(0)' : 'translateY(100vh)' }}>
-        <div class={styles.layanan}>
-      <h1 class={styles.title}>Kategori Layanan</h1>
-      <p class={styles.description}>Terdapat berbagai layanan yang siap membantu anda mengatasi situasi darurat.</p>
-      <button class={styles.viewAllButton} onClick={toggleLogin}>
-        Lihat semua <img src={arrowLihat} alt="Lihat semua" />
-      </button>
-      <div class={styles.servicesContainer}>
-        <img src={leftScroll} alt="Scroll left" class={styles.scrollIcon} />
-        <div class={styles.serviceBox}>
-          <img src={boxKepolisian} alt="Kepolisian" />
         </div>
-        <div class={`${styles.serviceBox} ${styles.blueBox}`}>
-          <img src={boxAmbulans} alt="Ambulans" />
+        <div class={styles.section} style={{ transform: section() === 2 ? 'translateY(0)' : section() === 3 ? 'translateY(-100vh)' : 'translateY(100vh)' }}>
+          <div class={styles.layanan}>
+            <h1 class={styles.title}>Kategori Layanan</h1>
+            <p class={styles.description}>Terdapat berbagai layanan yang siap membantu anda mengatasi situasi darurat.</p>
+            <button class={styles.viewAllButton} onClick={toggleLogin}>
+              Lihat semua <img src={arrowLihat} alt="Lihat semua" />
+            </button>
+            <div class={styles.servicesContainer}>
+              <img src={leftScroll} alt="Scroll left" class={styles.scrollIcon} onClick={handleScrollLeft} />
+              <div class={styles.boxFrame}>
+        <div class={styles.boxContainer} style={{ transform: `translateX(-${boxPosition() * boxWidth}%)` }}>
+        {boxImages.map((box, index) => (
+            <div
+              class={`${styles.serviceBox} ${index === activeIndex() ? styles.active : ''}`}
+            >
+              <img src={index === activeIndex() ? box.hoverSrc : box.src} alt={`Service Box ${index}`} />
+            </div>
+          ))}
         </div>
-        <div class={styles.serviceBox}>
-          <img src={boxPemadam} alt="Pemadam Kebakaran" />
-        </div>
-        <img src={rightScroll} alt="Scroll right" class={styles.scrollIcon} />
       </div>
+      <img src={rightScroll} alt="Scroll right" class={styles.scrollIcon} onClick={handleScrollRight} />
+            </div>
+          </div>
+        </div>
+        <div class={styles.section} style={{ transform: section() === 3 ? 'translateY(0)' : 'translateY(200vh)' }}>
+          {/* Content for section 3 */}
+        </div>
+      </main>
+      {showLogin() && <LoginPopUp onClose={closePopUp} onSwitch={toggleRegister} />}
+      {showRegister() && <RegisterPopUp onClose={closePopUp} onSwitch={toggleLogin} onRegister={handleRegister} />}
     </div>
-        </div>
-          <div class={styles.section} style={{ transform: section() === 3 ? 'translateY(0)' : 'translateY(100vh)' }}>
-          </div>
-        </main>
-        {showLogin() && <LoginPopUp onClose={closePopUp} onSwitch={toggleRegister} />}
-        {showRegister() && <RegisterPopUp onClose={closePopUp} onSwitch={toggleLogin} onRegister={handleRegister} />}
-      </div>
-    );
-  };
+  );
+};
 
-  export default LandingPage;
+export default LandingPage;
