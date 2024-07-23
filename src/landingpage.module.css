@@ -1,14 +1,17 @@
 body {
     font-family: 'Montserrat', sans-serif;
     overflow: hidden; /* Sembunyikan scrollbar */
+    scroll-behavior: smooth;
   }
   
   .container {
-    background-color: #0E0F13;
+    background-color: #0C0E12;
     color: white;
     height: 100vh;
     display: flex;
     flex-direction: column;
+    scroll-snap-type: y mandatory; /* Tambahkan properti ini */
+    overflow-y: scroll;
   }
   
   .header {
@@ -19,7 +22,7 @@ body {
     top: 0;
     width: 100%;
     z-index: 1000;
-    background-color: #0E0F13;
+    background-color: #0C0E12;
   }
   
   .logoContainer {
@@ -127,7 +130,7 @@ body {
     margin-bottom: 20px;
     margin-top: -23px;
     margin-left: 49px;
-    max-width: 50%;
+    max-width: 60%;
   }
   
   .textSection p {
@@ -135,7 +138,7 @@ body {
     font-size: 12.5px;
     font-weight: 418;
     margin-left: 49px;
-    max-width: 55%;
+    max-width: 65%;
     text-align: left;
     line-height: 1.7;
     color: #CFCFD0;
@@ -174,15 +177,48 @@ body {
     height: 13px;
   }
   
-  .imageSection {
+  .videoSection {
     position: relative;
-    margin-top: -18px;
-    margin-right: 51px;
+    max-width: 640px;
+    height: auto;
+  }
+
+  .video {
+    position: absolute;
+    margin-top: -242px;
+    margin-left: 17px;
+    max-width: 640px;
+    height: auto;
+    object-fit: cover;
+    opacity: 1s ease-in-out;
+  }
+
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
   }
   
-  .imageSection img {
-    max-width: 422px;
-    height: auto;
+  @keyframes fadeInRight {
+    0% {
+      opacity: 0;
+      transform: translateX(8%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .fadeOut {
+    animation: fadeOut 1s forwards;
+  }
+  
+  .fadeIn {
+    animation: fadeInRight 1s forwards;
   }
   
   .logoFrame {
@@ -201,7 +237,7 @@ body {
   .logosContainer {
     display: flex;
     width: fit-content;
-    animation: scroll 80s linear infinite;
+    animation: scroll 100s linear infinite;
     margin-top: -3px;
   }
   
@@ -235,13 +271,16 @@ body {
     align-items: center;
     position: relative;
     transition: transform 0.6s ease-in-out;
+    scroll-snap-align: start;
   }
   
   .layanan {
+    position: relative;
     text-align: center;
-    background-color: #0E0F13;
+    background-color: #0C0E12;
     color: white;
-    margin-left: -1200px;
+    margin-left: -600px;
+    justify-content: center;
   }
   
   .title {
@@ -265,7 +304,7 @@ body {
     position: center;
     align-items: center;
     background-color: white;
-    color: #32343A;
+    color: #0C0E12;
     font-weight: 622;
     padding: 9px 15px;
     border: none;
@@ -273,7 +312,6 @@ body {
     cursor: pointer;
     font-size: 13.3px;
     margin-bottom: 63px;
-    
   }
   
   .viewAllButton img {
@@ -281,6 +319,7 @@ body {
     width: 13px;
     height: 13px;
     margin-top: 1px;
+    color: black;
   }
   
   .servicesContainer {
@@ -295,20 +334,44 @@ body {
     width: 40px;
     height: 40px;
     cursor: pointer;
-    margin-left: 6px;
-    margin-right: 6px;
+    margin: 0 10px;
+  }
+  
+  .boxFrame {
+    display: flex;
+    overflow: hidden;
+    width: calc(335px * 3); /* Lebar frame untuk 3 box */
+  }
+  
+  .boxContainer {
+    display: flex;
+    transition: transform 0.6s ease;
+    width: calc(100% * 6);
   }
   
   .serviceBox {
-    margin: 0 8px;
-  }
-  
-  .serviceBox img {
+    flex: 1 0 33.33%;
     width: 320px;
     height: auto;
+    flex: 0 0 auto;
+    margin: 0 8px;
+    transition: background-image 0.3s ease-in-out;
   }
-  
-  .blueBox img {
-    background-color: #0056FF;
-    border-radius: 12px;
+
+  .serviceBox:hover {
+    cursor: pointer;
   }
+
+  .serviceBox.active {
+    background-size: cover;
+    background-position: center;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+}
+
+html {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
