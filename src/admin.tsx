@@ -3,7 +3,6 @@ import AgGridSolid from 'ag-grid-solid';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import styles from './admin.module.css';
-import { sha256 } from 'js-sha256'; // Pastikan Anda telah menginstal js-sha256
 
 const Admin: Component = () => {
   let gridApi;
@@ -62,10 +61,7 @@ const Admin: Component = () => {
     // Ambil data dari localStorage
     const userData = localStorage.getItem('users');
     if (userData) {
-      const rowData = JSON.parse(userData).map(user => ({
-        ...user,
-        password: sha256(user.password) // Enkripsi password
-      }));
+      const rowData = JSON.parse(userData);
       setRowData(rowData);
       gridApi.setRowData(rowData);
     }
@@ -90,6 +86,10 @@ const Admin: Component = () => {
     setEditingUser(null);
   };
 
+  const closePopup = () => {
+    setEditingUser(null);
+  };
+
   return (
     <div class={`${styles.container} ag-theme-alpine`}>
       <h1 class={styles.title}>Admin Dashboard</h1>
@@ -102,41 +102,46 @@ const Admin: Component = () => {
         />
       </div>
       {editingUser() && (
-        <div class={styles.editForm}>
-          <h2>Edit User</h2>
-          <label>
-            Nama Lengkap:
-            <input
-              type="text"
-              value={editingUser().name}
-              onInput={(e) => setEditingUser({ ...editingUser(), name: e.target.value })}
-            />
-          </label>
-          <label>
-            Email:
-            <input
-              type="email"
-              value={editingUser().email}
-              onInput={(e) => setEditingUser({ ...editingUser(), email: e.target.value })}
-            />
-          </label>
-          <label>
-            Password:
-            <input
-              type="password"
-              value={editingUser().password}
-              onInput={(e) => setEditingUser({ ...editingUser(), password: e.target.value })}
-            />
-          </label>
-          <label>
-            No Telp:
-            <input
-              type="tel"
-              value={editingUser().phone}
-              onInput={(e) => setEditingUser({ ...editingUser(), phone: e.target.value })}
-            />
-          </label>
-          <button onClick={handleSave}>Save</button>
+        <div class={styles.popup}>
+          <div class={styles.popupContent}>
+            <h2>Edit User</h2>
+            <div class={styles.editForm}>
+              <label>
+                Nama Lengkap:
+                <input
+                  type="text"
+                  value={editingUser().name}
+                  onInput={(e) => setEditingUser({ ...editingUser(), name: e.target.value })}
+                />
+              </label>
+              <label>
+                Email:
+                <input
+                  type="email"
+                  value={editingUser().email}
+                  onInput={(e) => setEditingUser({ ...editingUser(), email: e.target.value })}
+                />
+              </label>
+              <label>
+                Password:
+                <input
+                  type="password"
+                  value={editingUser().password}
+                  onInput={(e) => setEditingUser({ ...editingUser(), password: e.target.value })}
+                />
+              </label>
+              <label>
+                No Telp:
+                <input
+                  type="tel"
+                  value={editingUser().phone}
+                  onInput={(e) => setEditingUser({ ...editingUser(), phone: e.target.value })}
+                />
+              </label>
+              <button onClick={handleSave}>Save</button>
+              <button onClick={closePopup} class={styles.closeButton}>Close</button>
+            </div>
+          </div>
         </div>
       )}
     </div>

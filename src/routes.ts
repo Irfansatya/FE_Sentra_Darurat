@@ -16,6 +16,7 @@ export const routes: RouteDefinition[] = [
     path: '/registerpopup', // Ensure this path is all lowercase
     component: lazy(() => import('./RegisterPopUp')), // Ensure the path matches the file name
   },
+ 
 
   {
     path: '/admin', // Ensure this path is all lowercase
