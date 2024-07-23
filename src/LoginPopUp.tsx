@@ -6,6 +6,7 @@ import googleIcon from './image/google.svg';
 import showIcon from './image/showpassword.svg';
 import hideIcon from './image/hidepassword.svg';
 import close from './image/close.svg';
+import { sha256 } from 'js-sha256';
 
 const LoginPopUp: Component<{ onClose: () => void; onSwitch: () => void; }> = (props) => {
   const [showPassword, setShowPassword] = createSignal(false);
@@ -34,12 +35,16 @@ const LoginPopUp: Component<{ onClose: () => void; onSwitch: () => void; }> = (p
 
   const handleLogin = () => {
     const users = JSON.parse(localStorage.getItem('users')) || [];
-    const user = users.find(user => user.email === email() && user.password === password());
+    const user = users.find(user => user.email === email() && user.password === sha256(password()));
 
     if (email() === 'admin@gmail.com' && password() === 'admin123') {
       navigate('/admin');
     } else if (user) {
-      navigate('/beranda');
+      if (user.role === 'Admin') {
+        navigate('/admin');
+      } else {
+        navigate('/beranda');
+      }
     } else {
       setErrorMessage('Email/Password yang anda masukkan salah');
     }

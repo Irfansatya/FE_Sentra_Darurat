@@ -36,8 +36,9 @@ const RegisterPopUp: Component<{ onClose: () => void; onSwitch: () => void; onRe
     const newUser = {
       name: fullName(),
       email: email(),
-      password: password(),
-      phone: phone()
+      password: hashedPassword,
+      phone: phone(),
+      role: "Pengguna"
     };
     
     let users = JSON.parse(localStorage.getItem('users')) || [];
