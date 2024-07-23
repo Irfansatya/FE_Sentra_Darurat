@@ -30,6 +30,21 @@ import styles from './landingpage.module.css';
 import video1 from './animation/video1.mp4';
 import video2 from './animation/video2.mp4';
 import video3 from './animation/video3.mp4';
+import keunggulan1 from './image/keunggulan1.svg';
+import keunggulan2 from './image/keunggulan2.svg';
+import keunggulan3 from './image/keunggulan3.svg';
+import keunggulan4 from './image/keunggulan4.svg';
+import keunggulan5 from './image/keunggulan5.svg';
+import keunggulan6 from './image/keunggulan6.svg';
+import keunggulan7 from './image/keunggulan7.svg';
+import keunggulan8 from './image/keunggulan8.svg';
+import keunggulan9 from './image/keunggulan9.svg';
+import keunggulan10 from './image/keunggulan10.svg';
+import keunggulan11 from './image/keunggulan11.svg';
+import keunggulan12 from './image/keunggulan12.svg';
+import keunggulan13 from './image/keunggulan13.svg';
+import keunggulan14 from './image/keunggulan14.svg';
+import keunggulan15 from './image/keunggulan15.svg';
 
 const logos = [
   { src: kepolisian, alt: 'Kepolisian RI' },
@@ -51,6 +66,30 @@ const boxImages = [
   { src: boxListrik, hoverSrc: boxListrikHover },
 ];
 
+const imagesTop = [
+  { src: keunggulan8, alt: 'Keunggulan 8' },
+  { src: keunggulan9, alt: 'Keunggulan 9' } ,
+  { src: keunggulan10, alt: 'Keunggulan 10' },
+  { src: keunggulan11, alt: 'Keunggulan 11' },
+  { src: keunggulan12, alt: 'Keunggulan 12' },
+  { src: keunggulan13, alt: 'Keunggulan 13' },
+  { src: keunggulan14, alt: 'Keunggulan 14' },
+  { src: keunggulan15, alt: 'Keunggulan 15' },
+];
+
+const imagesBottom = [
+  {src: keunggulan7, alt: 'Keunggulan 7'},
+  {src: keunggulan6, alt: 'Keunggulan 6'},
+  {src: keunggulan5, alt: 'Keunggulan 5'},
+  {src: keunggulan4, alt: 'Keunggulan 4'},
+  {src: keunggulan3, alt: 'Keunggulan 3'},
+  {src: keunggulan2, alt: 'Keunggulan 2'},
+  {src: keunggulan1, alt: 'Keunggulan 1'},
+];
+
+const duplicatedImagesTop = [...imagesTop, ...imagesTop, ...imagesTop, ...imagesTop, ...imagesTop, ...imagesTop, ...imagesTop, ...imagesTop, ...imagesTop, ...imagesTop];
+const duplicatedImagesBottom = [...imagesBottom, ...imagesBottom, ...imagesBottom, ...imagesBottom, ...imagesBottom, ...imagesBottom, ...imagesBottom, ...imagesBottom, ...imagesBottom, ...imagesBottom];
+
 const LandingPage: Component = () => {
   const [activeNav, setActiveNav] = createSignal('Fitur');
   const [showLogin, setShowLogin] = createSignal(false);
@@ -60,6 +99,8 @@ const LandingPage: Component = () => {
   const [fadeOut, setFadeOut] = createSignal(false);
   const [boxPosition, setBoxPosition] = createSignal(0);
   const [activeIndex, setActiveIndex] = createSignal(0);
+  const [scrollPositionTop, setScrollPositionTop] = createSignal(0);
+  const [scrollPositionBottom, setScrollPositionBottom] = createSignal(0);
   const boxCount = 6;
   const boxesPerView = 3;
   const boxWidth = 100 / boxesPerView;
@@ -185,17 +226,25 @@ const LandingPage: Component = () => {
   };
 
   const handleScrollLeft = () => {
-    setBoxPosition((prev) => Math.max(prev - 1, 0));
+    setBoxPosition((prev) => Math.max(prev - 0.5, 0));
   };
   
   const handleScrollRight = () => {
-    setBoxPosition((prev) => Math.min(prev + 1, boxCount - boxesPerView));
+    setBoxPosition((prev) => Math.min(prev + 0.5, 1.5));
   };
 
   createEffect(() => {
-    const centerIndex = Math.floor(boxesPerView / 2);
-    const newActiveIndex = Math.min(boxPosition() + centerIndex, boxCount - 1);
-    setActiveIndex(newActiveIndex);
+    // Jumlah box yang terlihat di frame
+    const visibleBoxCount = boxesPerView;
+    // Indeks box yang berada di tengah frame
+    const centerIndex = Math.floor(visibleBoxCount / 3);
+    
+    // Hitung posisi box yang sedang aktif berdasarkan boxPosition
+    // boxPosition dikalikan dengan (boxCount - boxesPerView) karena posisi ini adalah dalam skala 0 hingga boxCount - boxesPerView
+    const activeBoxIndex = Math.round(boxPosition() * (3 - 1) + centerIndex);
+  
+    // Set activeIndex dengan batasan yang valid
+    setActiveIndex(Math.max(0, Math.min(activeBoxIndex, boxCount - 1)));
   });
 
   const toggleLogin = () => {
@@ -248,6 +297,8 @@ const LandingPage: Component = () => {
       </header>
       <main class={styles.mainContent}>
         <div class={styles.section} style={{ transform: section() === 1 ? 'translateY(0)' : section() === 2 ? 'translateY(-100vh)' : 'translateY(-200vh)' }}>
+
+          {/* Content Section 1 */}
           <div class={styles.textSection}>
             <h1>Laporkan Situasi <br />Darurat yang Terjadi <br />Disekitar Anda</h1>
             <p>Segera hubungi nomor layanan darurat yang anda butuhkan <br />lalu kirimkan bukti atau detail situasi beserta foto <br />langsung dari lokasi kejadian.</p>
@@ -271,6 +322,8 @@ const LandingPage: Component = () => {
           </div>
         </div>
         <div class={styles.section} style={{ transform: section() === 2 ? 'translateY(0)' : section() === 3 ? 'translateY(-100vh)' : 'translateY(100vh)' }}>
+
+          {/* Content Section 2 */}
           <div class={styles.layanan}>
             <h1 class={styles.title}>Kategori Layanan</h1>
             <p class={styles.description}>Terdapat berbagai layanan yang siap membantu anda mengatasi situasi darurat.</p>
@@ -280,7 +333,7 @@ const LandingPage: Component = () => {
             <div class={styles.servicesContainer}>
               <img src={leftScroll} alt="Scroll left" class={styles.scrollIcon} onClick={handleScrollLeft} />
               <div class={styles.boxFrame}>
-        <div class={styles.boxContainer} style={{ transform: `translateX(-${boxPosition() * boxWidth}%)` }}>
+        <div class={styles.boxContainer} onClick={toggleLogin} style={{ transform: `translateX(-${boxPosition() * boxWidth}%)` }}>
         {boxImages.map((box, index) => (
             <div
               class={`${styles.serviceBox} ${index === activeIndex() ? styles.active : ''}`}
@@ -290,12 +343,34 @@ const LandingPage: Component = () => {
           ))}
         </div>
       </div>
-      <img src={rightScroll} alt="Scroll right" class={styles.scrollIcon} onClick={handleScrollRight} />
+      <img src={rightScroll} alt="Scroll right" class={`${styles.scrollIcon} ${boxPosition() >= boxCount - boxesPerView ? styles.disabled : ''}`}
+      onClick={boxPosition() < boxCount - boxesPerView ? handleScrollRight : undefined} />
             </div>
           </div>
         </div>
-        <div class={styles.section} style={{ transform: section() === 3 ? 'translateY(0)' : 'translateY(200vh)' }}>
-          {/* Content for section 3 */}
+        <div class={styles.section} style={{ transform: section() === 3 ? 'translateY(0)' : section() === 4 ? 'translateY(-100vh)' : 'translateY(100vh)' }}>
+
+          {/* Content Section 3 */}
+          <div class={styles.keunggulan}>
+            <p class={styles.berbagai}>Berbagai</p>
+            <h1 class={styles.judul}>Keunggulan Layanan</h1>
+            <div class={styles.frame}>
+            <div id="imageContainer" class={`${styles.imageContainer} ${styles.top}`}>
+              {duplicatedImagesTop.map((imagesTop) => (
+                <div class={styles.imageItem}>
+                  <img src={imagesTop.src} alt={imagesTop.alt} />
+                </div>
+              ))}
+            </div>
+            <div id="imageContainer" class={`${styles.imageContainer} ${styles.bottom}`}>
+              {duplicatedImagesBottom.map((imagesBottom) => (
+                <div class={styles.imageItem}>
+                  <img src={imagesBottom.src} alt={imagesBottom.alt} />
+                </div>
+              ))}
+            </div>
+          </div>
+          </div>
         </div>
       </main>
       {showLogin() && <LoginPopUp onClose={closePopUp} onSwitch={toggleRegister} />}
