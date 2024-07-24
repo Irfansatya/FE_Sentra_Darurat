@@ -99,12 +99,10 @@ const LandingPage: Component = () => {
   const [fadeOut, setFadeOut] = createSignal(false);
   const [boxPosition, setBoxPosition] = createSignal(0);
   const [activeIndex, setActiveIndex] = createSignal(0);
-  const [scrollPositionTop, setScrollPositionTop] = createSignal(0);
-  const [scrollPositionBottom, setScrollPositionBottom] = createSignal(0);
   const boxCount = 6;
   const boxesPerView = 3;
   const boxWidth = 100 / boxesPerView;
-  const sectionCount = 3;
+  const sectionCount = 5;
   let isScrolling = false;
   const videos = [video1, video2, video3];
   let videoIndex = 0;
@@ -187,8 +185,12 @@ const LandingPage: Component = () => {
       setActiveNav('Fitur');
     } else if (scrollPosition < 2 * window.innerHeight) {
       setActiveNav('Layanan');
-    } else {
+    } else if (scrollPosition < 3 * window.innerHeight) {
       setActiveNav('Keunggulan');
+    } else if (scrollPosition < 4 * window.innerHeight) {
+      setActiveNav('Panduan');
+    } else {
+      setActiveNav('Kontak');
     }
   };
 
@@ -219,6 +221,9 @@ const LandingPage: Component = () => {
     } else if (navItem === 'Panduan') {
       setSection(4);
       window.scrollTo({ top: 3 * window.innerHeight, behavior: 'smooth' });
+    } else if (navItem === 'Kontak') {
+      setSection(5);
+      window.scrollTo({ top: 4 * window.innerHeight, behavior: 'smooth' });
     } else {
       setSection(1);
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -268,7 +273,7 @@ const LandingPage: Component = () => {
   };
 
   return (
-    <div class={styles.container}>
+    <div class={styles.container} onwheel={handleWheelScroll} ontouchstart={handleTouchStart} ontouchmove={handleTouchMove}>
       <header class={styles.header}>
         <div class={styles.logoContainer}>
           <img src={logo} alt="Logo" class={styles.logo} />
@@ -296,7 +301,7 @@ const LandingPage: Component = () => {
         </nav>
       </header>
       <main class={styles.mainContent}>
-        <div class={styles.section} style={{ transform: section() === 1 ? 'translateY(0)' : section() === 2 ? 'translateY(-100vh)' : 'translateY(-200vh)' }}>
+      <div class={styles.section} style={{ transform: `translateY(${(section() - 1) * -100}vh)` }}>
 
           {/* Content Section 1 */}
           <div class={styles.textSection}>
@@ -321,7 +326,7 @@ const LandingPage: Component = () => {
           <video src={currentVideo()} class={`${styles.video} ${fadeOut() ? styles.fadeOut : styles.fadeIn}`} autoplay loop muted />
           </div>
         </div>
-        <div class={styles.section} style={{ transform: section() === 2 ? 'translateY(0)' : section() === 3 ? 'translateY(-100vh)' : 'translateY(100vh)' }}>
+        <div class={styles.section} style={{ transform: `translateY(${(section() - 2) * -100}vh)` }}>
 
           {/* Content Section 2 */}
           <div class={styles.layanan}>
@@ -348,7 +353,7 @@ const LandingPage: Component = () => {
             </div>
           </div>
         </div>
-        <div class={styles.section} style={{ transform: section() === 3 ? 'translateY(0)' : section() === 4 ? 'translateY(-100vh)' : 'translateY(100vh)' }}>
+        <div class={styles.section} style={{ transform: `translateY(${(section() - 4) * -100}vh)` }}>
 
           {/* Content Section 3 */}
           <div class={styles.keunggulan}>
@@ -368,6 +373,20 @@ const LandingPage: Component = () => {
                   <img src={imagesBottom.src} alt={imagesBottom.alt} />
                 </div>
               ))}
+            </div>
+          </div>
+          <div class={styles.section} style={{ transform: `translateY(${(section() - 4) * -100}vh)` }}>
+
+            {/* Content Section 4 */}
+            <div class={styles.panduan}>
+              <h1>Panduan Pengguna</h1>
+            </div>
+          </div>
+          <div class={styles.section} style={{ transform: `translateY(${(section() - 5) * -100}vh)` }}>
+
+            {/* Content Section 5 */}
+            <div class={styles.kontak}>
+              <h1>Kontak Kami</h1>
             </div>
           </div>
           </div>

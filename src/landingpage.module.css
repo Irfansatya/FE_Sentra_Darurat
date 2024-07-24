@@ -410,7 +410,7 @@ html {
 
 .imageContainer {
   display: flex;
-  animation: scroll 100s linear infinite;
+  animation: scroll 110s linear infinite;
   align-items: center;
 }
 
@@ -454,4 +454,20 @@ html {
   100% {
     transform: translateX(-50%);
   }
+}
+
+.panduan {
+  position: relative;
+  text-align: center;
+  background-color: #0C0E12;
+  color: white;
+  justify-content: center;
+}
+
+.kontak {
+  position: relative;
+  text-align: center;
+  background-color: #0C0E12;
+  color: white;
+  justify-content: center;
 }
