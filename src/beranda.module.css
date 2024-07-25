@@ -1,0 +1,174 @@
+/* Atur tinggi penuh dan overflow pada elemen root */
+body {
+    font-family: 'Montserrat', sans-serif;
+    height: 100%;
+    overflow: auto;
+    margin: 0;
+}
+
+.container {
+    color: white;
+    background-color: #1a1a1a;
+    height: 100%;
+    overflow-y: auto; /* Pastikan overflow diatur ke auto */
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #2d2d2d;
+}
+
+.logo {
+    height: 40px;
+}
+
+.navLinks a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: white;
+}
+
+.navLinks .active {
+    border-bottom: 2px solid blue;
+}
+
+.navRight {
+    display: flex;
+    align-items: center;
+}
+
+.searchBox {
+    display: flex;
+    align-items: center;
+    background-color: #444;
+    border-radius: 20px;
+    padding: 5px 10px;
+    margin-right: 10px;
+}
+
+.searchBox input {
+    border: none;
+    background: none;
+    color: white;
+    margin-left: 5px;
+    outline: none;
+}
+
+.searchIcon, .icon, .profileCircle {
+    height: 25px;
+    margin: 0 10px;
+}
+
+.profileCircle {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #0a74da;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero {
+    position: relative;
+}
+
+.background {
+    width: 100%;
+    height: 300px;
+}
+
+.heroContent {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.heroContent h1 {
+    font-size: 24px;
+}
+
+.heroBoxes {
+    display: flex;
+}
+
+.heroBox {
+    display: flex;
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+    margin-right: 20px;
+    padding: 10px;
+}
+
+.heroBox img {
+    height: 50px;
+    margin-right: 10px;
+}
+
+.heroBox button {
+    background-color: #0a74da;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.servicesSection {
+    padding: 20px;
+}
+
+.servicesSection h2 {
+    text-align: center;
+}
+
+.servicesContainer {
+    display: flex;
+    align-items: center;
+}
+
+.arrow {
+    cursor: pointer;
+}
+
+.servicesFrame {
+    display: flex;
+    overflow-x: auto; /* Pastikan overflow-x diatur ke auto */
+    width: 100%;
+}
+
+.serviceBox {
+    background-color: #333;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 20px;
+    position: relative;
+}
+
+.serviceImage, .callIcon {
+    height: 40px;
+}
+
+.serviceContent {
+    margin-top: 10px;
+}
+
+.serviceLogo, .serviceNumber {
+    height: 20px;
+    margin-bottom: 10px;
+}
+
+.footer {
+    background-color: #2d2d2d;
+    text-align: center;
+    padding: 20px;
+}
+
+.footerLinks img {
+    height: 20px;
+    margin: 0 10px;
+}

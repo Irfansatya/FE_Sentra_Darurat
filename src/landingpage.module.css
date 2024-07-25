@@ -465,9 +465,101 @@ html {
 }
 
 .kontak {
-  position: relative;
-  text-align: center;
   background-color: #0C0E12;
   color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.kontak h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.kontak .container {
+  display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.kontak .info, .kontak .form {
+  background-color: #1A1B1F;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 10px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.kontak .info h2, .kontak .form h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.kontak .info p, .kontak .form p {
+  font-size: 14px;
+  color: #CFCFD0;
+  margin-bottom: 20px;
+}
+
+.kontak .contactDetail {
+  display: flex;
+  flex-direction: column;
+}
+
+.kontak .contactItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.kontak .contactItem img {
+  margin-right: 10px;
+}
+
+.kontak .contactItem h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.kontak .contactItem p {
+  font-size: 14px;
+  margin: 0;
+}
+
+.kontak .copyIcon {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.kontak .form input, .kontak .form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #3A3B3F;
+  border-radius: 4px;
+  background-color: #2A2B2F;
+  color: white;
+}
+
+.kontak .form button {
+  background-color: #0056FF;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.kontak .socialMedia {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.kontak .socialMedia img {
+  margin: 0 10px;
+  cursor: pointer;
 }
