@@ -4,6 +4,7 @@ import LandingPage from './landingpage';
 import Admin from './admin';
 import LoginPopUp from './LoginPopUp';
 import RegisterPopUp from './RegisterPopUp';
+import Beranda from './beranda';
 
 const App: Component = () => {
   return (
@@ -11,6 +12,7 @@ const App: Component = () => {
       <Route path="/" component={LandingPage} />
       <Route path="/loginpopup" component={LoginPopUp} />
       <Route path="/registerpopup" component={RegisterPopUp} />
+      <Route path="/beranda" component={Beranda} />
       <Route path="/admin" component={Admin} />
     </Routes>
   );

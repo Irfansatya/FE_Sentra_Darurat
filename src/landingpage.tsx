@@ -53,6 +53,14 @@ import instagram from './image/instagram.svg';
 import twitter from './image/twitter.svg';
 import facebook from './image/facebook.svg';
 import linkedin from './image/linkedin.svg';
+import infoEmail from './image/infoEmail.svg';
+import infoAlamat from './image/infoAlamat.svg';
+import infoTelepon from './image/infoTelepon.svg';
+import copy from './image/copy.svg';
+import instagram from './image/instagram.svg';
+import twitter from './image/twitter.svg';
+import facebook from './image/facebook.svg';
+import linkedin from './image/linkedin.svg';
 
 const logos = [
   { src: kepolisian, alt: 'Kepolisian RI' },
@@ -151,9 +159,11 @@ const LandingPage: Component = () => {
     if (event.deltaY > 0) {
       if (section() < sectionCount) {
         setSection((prev) => prev + 1/2);
+        setSection((prev) => prev + 1/2);
       }
     } else {
       if (section() > 1) {
+        setSection((prev) => prev - 1/2);
         setSection((prev) => prev - 1/2);
       }
     }
