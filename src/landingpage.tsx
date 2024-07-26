@@ -45,15 +45,7 @@ import keunggulan12 from './image/keunggulan12.svg';
 import keunggulan13 from './image/keunggulan13.svg';
 import keunggulan14 from './image/keunggulan14.svg';
 import keunggulan15 from './image/keunggulan15.svg';
-import infoEmail from './image/infoEmail.svg';
-import infoAlamat from './image/infoAlamat.svg';
-import infoTelepon from './image/infoTelepon.svg';
-import copy from './image/copy.svg';
-import instagram from './image/instagram.svg';
-import twitter from './image/twitter.svg';
-import facebook from './image/facebook.svg';
-import linkedin from './image/linkedin.svg';
-import infoEmail from './image/infoEmail.svg';
+import infoEmail from './image/infoEmail.svg'
 import infoAlamat from './image/infoAlamat.svg';
 import infoTelepon from './image/infoTelepon.svg';
 import copy from './image/copy.svg';
