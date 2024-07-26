@@ -45,6 +45,14 @@ import keunggulan12 from './image/keunggulan12.svg';
 import keunggulan13 from './image/keunggulan13.svg';
 import keunggulan14 from './image/keunggulan14.svg';
 import keunggulan15 from './image/keunggulan15.svg';
+import infoEmail from './image/infoEmail.svg';
+import infoAlamat from './image/infoAlamat.svg';
+import infoTelepon from './image/infoTelepon.svg';
+import copy from './image/copy.svg';
+import instagram from './image/instagram.svg';
+import twitter from './image/twitter.svg';
+import facebook from './image/facebook.svg';
+import linkedin from './image/linkedin.svg';
 
 const logos = [
   { src: kepolisian, alt: 'Kepolisian RI' },
@@ -142,11 +150,11 @@ const LandingPage: Component = () => {
 
     if (event.deltaY > 0) {
       if (section() < sectionCount) {
-        setSection((prev) => prev + 1);
+        setSection((prev) => prev + 1/2);
       }
     } else {
       if (section() > 1) {
-        setSection((prev) => prev - 1);
+        setSection((prev) => prev - 1/2);
       }
     }
 
@@ -386,16 +394,73 @@ const LandingPage: Component = () => {
 
             {/* Content Section 5 */}
             <div class={styles.kontak}>
-              <h1>Kontak Kami</h1>
-            </div>
-          </div>
-          </div>
-        </div>
-      </main>
-      {showLogin() && <LoginPopUp onClose={closePopUp} onSwitch={toggleRegister} />}
-      {showRegister() && <RegisterPopUp onClose={closePopUp} onSwitch={toggleLogin} onRegister={handleRegister} />}
-    </div>
-  );
-};
+                <div class={styles.container}>
+                <div class={styles.info}>
+                  <h2>Informasi Kontak</h2>
+                  <p>Kami selalu siap mendengar dan membantu anda. Jika anda memiliki pertanyaan atau ingin memberikan masukan, jangan ragu untuk menghubungi kami melalui kontak berikut:</p>
+                  <div class={styles.contactDetail}>
+                    <div class={styles.borderTelepon}>
+                      <div class={styles.contactItem}>
+                        <img src={infoTelepon} alt="Telepon" />
+                        <div>
+                          <h3>Telepon</h3>
+                          <p>0821-5647-8900</p>
+                          <img src={copy} alt="Copy" class={styles.copyIcon} />
+                        </div>
+                      </div>
+                    </div>
+                    <div class={styles.borderEmail}>
+                      <div class={styles.contactItem}>
+                        <img src={infoEmail} alt="Email" />
+                        <div>
+                          <h3>Email</h3>
+                          <p>sentradarurat@gmail.com</p>
+                          <img src={copy} alt="Copy" class={styles.copyIcon} />
+                        </div>
+                      </div>
+                    </div>
+                    <div class={styles.borderAlamat}>
+                      <div class={styles.contactItem}>
+                        <img src={infoAlamat} alt="Alamat" />
+                        <div>
+                          <h3>Alamat</h3>
+                          <p>Jl. Taman Sunda Kelapa No.16, Menteng, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10310</p>
+                          <img src={copy} alt="Copy" class={styles.copyIcon} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-export default LandingPage;
+                  <div class={styles.form}>
+                    <h2>Hubungi Kami</h2>
+                    <p>Tulis pesan bantuan ataupun kritik & saran kepada kami disini!</p>
+                    <input type="text" placeholder="Masukkan nama.." />
+                    <input type="email" placeholder="Masukkan email.." />
+                    <textarea placeholder="Tulis pesan anda disini.." maxLength="1000"></textarea>
+                    <button type="submit">Kirim Pesan</button>
+                  </div>
+                </div>
+                  <div class={styles.footer}>
+                  <hr />
+                  <p>© 2024 Sentra Darurat. All rights reserved.</p>
+                  <div class={styles.socialMedia}>
+                    <img src={instagram} alt="Instagram" />
+                    <img src={twitter} alt="Twitter" />
+                    <img src={facebook} alt="Facebook" />
+                    <img src={linkedin} alt="LinkedIn" />
+                  </div>
+                </div>
+              </div>
+
+              </div>
+              </div>
+            </div>
+          </main>
+          {showLogin() && <LoginPopUp onClose={closePopUp} onSwitch={toggleRegister} />}
+          {showRegister() && <RegisterPopUp onClose={closePopUp} onSwitch={toggleLogin} onRegister={handleRegister} />}
+        </div>
+      );
+    };
+
+    export default LandingPage;
