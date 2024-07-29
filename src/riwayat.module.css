@@ -1,0 +1,88 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    height: 100%;
+    overflow: auto;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Pastikan kontainer utama memiliki minimum height 100vh */
+    overflow-y: auto;
+    background-color: #0E0F13;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #0E0F13;
+    height: 79px;
+    border-bottom: 2px solid #202228;
+  }
+  
+  .logo {
+    height: 22px;
+    width: auto;
+    margin-left: 16px;
+    margin-top: -2px;
+  }
+
+  .appName {
+    font-size: 20px;
+    color: white;
+    font-weight: 630;
+    margin-right: 23px;
+  }
+  
+  .navItems {
+    display: flex;
+    margin-right: 35px;
+    margin-top: 28px;
+  }
+  
+  .navItem {
+    color: white;
+    text-decoration: none;
+    position: relative;
+    font-size: 14px;
+    font-weight: 570;
+  }
+
+  .navItemActive {
+    color: #3B7DFF;
+    text-decoration: none;
+    position: relative;
+    font-size: 14px;
+    font-weight: 570;
+    border-bottom: 3.7px solid #3B7DFF;
+    height: 48px;
+    width: 80px;
+    text-align: center;
+  }
+
+  .navItemPanggilan {
+    color: white;
+    font-size: 14px;
+    position: relative;
+    font-weight: 570;
+    text-decoration: none;
+    margin-left: 24px;
+  }
+
+  .navItemRiwayat {
+    color: white;
+    font-size: 14px;
+    position: relative;
+    font-weight: 570;
+    text-decoration: none;
+    margin-left: 33px;
+  }
+  
+  .navRight {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }

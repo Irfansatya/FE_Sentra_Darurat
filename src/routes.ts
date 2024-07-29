@@ -28,6 +28,16 @@ export const routes: RouteDefinition[] = [
   },
 
   {
+    path: '/panggilan', // Ensure this path is all lowercase
+    component: lazy(() => import('./panggilan')), // Ensure the path matches the file name
+  },
+
+  {
+    path: '/riwayat', // Ensure this path is all lowercase
+    component: lazy(() => import('./riwayat')), // Ensure the path matches the file name
+  },
+
+  {
     path: '**',
     component: lazy(() => import('./errors/404')),
   },

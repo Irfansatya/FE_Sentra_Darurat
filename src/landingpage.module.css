@@ -86,7 +86,7 @@ body {
     width: 18px;
   }
   
-  .arrowDown {
+  .arrowLanguage {
     margin-left: 4.5px;
     width: 10px !important; /* Atur ukuran sesuai kebutuhan */
     height: 10px !important; /* Atur ukuran sesuai kebutuhan */
@@ -288,14 +288,12 @@ body {
     font-weight: 660;
     margin-bottom: 8px;
     margin-top: -22px;
-    
   }
   
-  .description {
+  .deskripsiLayanan {
     font-size: 14px;
     font-weight: 480;
     margin-bottom: 28px;
-    
     color: #CFCFD0;
   }
   
@@ -388,7 +386,7 @@ html {
   font-size: 14.2px;
   font-weight: 610;
   color: #3B7DFF;
-  margin-top: -12px;
+  margin-top: -23px;
 }
 
 .judul {
@@ -462,104 +460,272 @@ html {
   background-color: #0C0E12;
   color: white;
   justify-content: center;
-}
-
-.kontak {
-  background-color: #0C0E12;
-  color: white;
   padding: 20px;
-  text-align: center;
 }
 
-.kontak h1 {
-  font-size: 36px;
-  margin-bottom: 20px;
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: #1D1F25;
+  border-radius: 10px;
+  height: 427px;
+  width: 1100px;
+  margin-top: 130px;
 }
 
-.kontak .container {
+.background {
+  position: relative;
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  margin-right: 20px;
+  margin-top: 0px;
+  margin-left: 0px;
 }
 
-.kontak .info, .kontak .form {
-  background-color: #1A1B1F;
-  border-radius: 8px;
-  padding: 20px;
-  margin: 10px;
-  width: 100%;
-  max-width: 600px;
+.backgroundImage {
+  width: auto;
+  height: 426px;
 }
 
-.kontak .info h2, .kontak .form h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
+.guideImageWrapper {
+  position: absolute;
 }
 
-.kontak .info p, .kontak .form p {
-  font-size: 14px;
-  color: #CFCFD0;
-  margin-bottom: 20px;
+.guideImage {
+  width: 488px;
+  height: auto;
 }
 
-.kontak .contactDetail {
+.cursorAnimation {
+  position: absolute;
+  top: 52%;
+  left: 24%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+}
+
+.guides {
+  flex: 1;
   display: flex;
   flex-direction: column;
+  gap: 10px;
+  margin-top: 70px;
 }
 
-.kontak .contactItem {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
+.judulPanduan {
+  font-size: 25px;
+  font-weight: 670;
+  margin-right: 222px;
+  margin-top: -47px;
 }
 
-.kontak .contactItem img {
-  margin-right: 10px;
-}
-
-.kontak .contactItem h3 {
-  font-size: 18px;
+.guide {
+  background-color: #33353A;
+  padding: 11px;
+  border-radius: 7px;
+  color: white;
+  font-size: 13px;
+  font-weight: 400;
+  width: 500px;
+  margin-left: 12px;
   margin-bottom: 5px;
 }
 
-.kontak .contactItem p {
-  font-size: 14px;
-  margin: 0;
-}
-
-.kontak .copyIcon {
-  margin-left: 10px;
+.guideHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   cursor: pointer;
 }
 
-.kontak .form input, .kontak .form textarea {
+.arrowIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.description {
+  margin-top: 10px;
+  border: 1px solid #858689;
+  padding: 10px;
+  font-size: 12px;
+  font-weight: 400;
+  border-radius: 7px;
+  width: 450px;
+  margin-top: 25px;
+  margin-left: 15px;
+  text-align: left;
+}
+
+.kontak {
+  position: relative;
+  text-align: center;
+  background-color: #0C0E12;
+  color: white;
+  justify-content: center;
+}
+
+.section5Content {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 413px;
+}
+
+.contactInfo {
+  background-color: #1D1F25;
+  border-radius: 10px;
+  margin-right: 20px;
+  flex: 1;
+  width: 610px;
+  height: 325px;
+  margin-left: 57px;
+  margin-top: 13px;
+}
+
+.contactInfo h2 {
+  margin-bottom: 10px;
+  font-size: 21px;
+  font-weight: 580;
+  margin-right: 326px;
+  margin-top: 17px;
+}
+
+.contactForm h2 {
+  margin-bottom: 10px;
+  font-size: 21px;
+  font-weight: 580;
+  margin-right: 350px;
+}
+
+.contactInfo p {
+  margin-bottom: 20px;
+  font-size: 12.5px;
+  font-weight: 450;
+  margin-top: 5px;
+  text-align: left;
+  margin-left: 24px;
+  color: #BBBBBD;
+  line-height: 19.5px;
+}
+
+.contactForm p {
+  margin-bottom: 20px;
+  font-size: 12px;
+  margin-top: 30px;
+}
+
+.contactBox1 {
+  display: flex;
+  flex-direction: column;
+  width: 222px;
+  height: 62px;
+  margin-left: 24px;
+  margin-top: 27px;
+}
+
+.contactBox2 {
+  display: flex;
+  flex-direction: column;
+  width: 274px;
+  height: 62px;
+  margin-left: 260px;
+  margin-top: -72px;
+}
+
+.contactBox3 {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  width: 500px;
+  height: 40px;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  background-color: #2A2D34;
+  border-radius: 7px;
+}
+
+.email {
+  margin-left: 7px;
+  cursor: pointer;
+  width: 40px;
+  height: auto;
+}
+
+.telepon {
+  margin-left: 7px;
+  cursor: pointer;
+  width: 40px;
+  height: auto;
+}
+
+.alamat {
+  margin-right: 10px;
+  cursor: pointer;
+  width: 40px;
+  height: auto;
+}
+
+.copyIcon {
+  margin-right: 10px;
+  cursor: pointer;
+  width: 20px;
+  height: auto;
+}
+
+.contactItem div {
+  flex: 1;
+}
+
+.contactForm {
+  flex: 1;
+  margin-left: 20px;
+}
+
+.input, .textarea {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
-  border: 1px solid #3A3B3F;
-  border-radius: 4px;
-  background-color: #2A2B2F;
-  color: white;
-}
-
-.kontak .form button {
-  background-color: #0056FF;
-  color: white;
-  padding: 10px 20px;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
+  background-color: #1D1F25;
+  color: #FFFFFF;
+}
+
+.textarea {
+  height: 100px;
+  resize: none;
+}
+
+.button {
+  padding: 10px;
+  background-color: #007BFF;
+  border: none;
+  border-radius: 8px;
+  color: #FFFFFF;
   cursor: pointer;
-  font-size: 16px;
 }
 
-.kontak .socialMedia {
+.footer {
   display: flex;
-  justify-content: center;
-  margin-top: 20px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-top: 1px solid #323336;
+  margin-top: 200px;
 }
 
-.kontak .socialMedia img {
-  margin: 0 10px;
-  cursor: pointer;
+.footerText {
+  color: #B6B7B8;
+}
+
+.socialIcons img {
+  margin-left: 10px;
+  cursor: pointer;
 }

@@ -1,7 +1,7 @@
 import { Component, createSignal, createEffect } from 'solid-js';
 import logo from './image/logo.svg';
 import language from './image/language.svg';
-import arrowDown from './image/arrowDown.svg';
+import arrowLanguage from './image/arrowLanguage.svg';
 import arrow from './image/arrow.svg';
 import kepolisian from './image/kepolisian.svg';
 import kemenkes from './image/kemenkes.svg';
@@ -45,14 +45,19 @@ import keunggulan12 from './image/keunggulan12.svg';
 import keunggulan13 from './image/keunggulan13.svg';
 import keunggulan14 from './image/keunggulan14.svg';
 import keunggulan15 from './image/keunggulan15.svg';
+import backgroundPanduan from './image/backgroundPanduan.png';
+import gambarPanduan1 from './image/gambarPanduan1.svg';
+import arrowUp from './image/arrowUp.svg';
+import arrowDown from './image/arrowDown.svg';
+import cursorClick from './animation/cursorClick.gif';
+import infoTelepon from './image/infoTelepon.svg';
 import infoEmail from './image/infoEmail.svg';
 import infoAlamat from './image/infoAlamat.svg';
-import infoTelepon from './image/infoTelepon.svg';
 import copy from './image/copy.svg';
+import linkedin from './image/linkedin.svg';
+import facebook from './image/facebook.svg';
 import instagram from './image/instagram.svg';
 import twitter from './image/twitter.svg';
-import facebook from './image/facebook.svg';
-import linkedin from './image/linkedin.svg';
 
 const logos = [
   { src: kepolisian, alt: 'Kepolisian RI' },
@@ -107,6 +112,7 @@ const LandingPage: Component = () => {
   const [fadeOut, setFadeOut] = createSignal(false);
   const [boxPosition, setBoxPosition] = createSignal(0);
   const [activeIndex, setActiveIndex] = createSignal(0);
+  const [activeDescription, setActiveDescription] = createSignal<number | null>(null);
   const boxCount = 6;
   const boxesPerView = 3;
   const boxWidth = 100 / boxesPerView;
@@ -114,6 +120,19 @@ const LandingPage: Component = () => {
   let isScrolling = false;
   const videos = [video1, video2, video3];
   let videoIndex = 0;
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    alert('Copied to clipboard: ' + text);
+  };
+
+  const toggleDescription = (descriptionNumber: number) => {
+    if (activeDescription() === descriptionNumber) {
+      setActiveDescription(null);
+    } else {
+      setActiveDescription(descriptionNumber);
+    }
+  };
 
   const changeVideo = () => {
     setFadeOut(true);
@@ -150,11 +169,11 @@ const LandingPage: Component = () => {
 
     if (event.deltaY > 0) {
       if (section() < sectionCount) {
-        setSection((prev) => prev + 1/2);
+        setSection((prev) => prev + 0.5);
       }
     } else {
       if (section() > 1) {
-        setSection((prev) => prev - 1/2);
+        setSection((prev) => prev - 0.5);
       }
     }
 
@@ -302,7 +321,7 @@ const LandingPage: Component = () => {
           <div class={styles.languageSection}>
             <img src={language} alt="Language" />
             <span>IND</span>
-            <img src={arrowDown} alt="Arrow Down Icon" class={styles.arrowDown} />
+            <img src={arrowLanguage} alt="Arrow Down Icon" class={styles.arrowLanguage} />
           </div>
           <button class={styles.loginButton} onClick={toggleLogin}>Masuk</button>
           <button class={styles.registerButton} onClick={toggleRegister}>Daftar</button>
@@ -339,7 +358,7 @@ const LandingPage: Component = () => {
           {/* Content Section 2 */}
           <div class={styles.layanan}>
             <h1 class={styles.title}>Kategori Layanan</h1>
-            <p class={styles.description}>Terdapat berbagai layanan yang siap membantu anda mengatasi situasi darurat.</p>
+            <p class={styles.deskripsiLayanan}>Terdapat berbagai layanan yang siap membantu anda mengatasi situasi darurat.</p>
             <button class={styles.viewAllButton} onClick={toggleLogin}>
               Lihat semua <img src={arrowLihat} alt="Lihat semua" />
             </button>
@@ -387,60 +406,129 @@ const LandingPage: Component = () => {
 
             {/* Content Section 4 */}
             <div class={styles.panduan}>
-              <h1>Panduan Pengguna</h1>
+        <div class={styles.content}>
+          <div class={styles.background}>
+            <img src={backgroundPanduan} alt="Background Panduan" class={styles.backgroundImage} />
+            <div class={styles.guideImageWrapper}>
+              <img src={gambarPanduan1} alt="Panduan 1" class={styles.guideImage} />
+              <img src={cursorClick} alt="Cursor Click Animation" class={styles.cursorAnimation} />
+            </div>
+          </div>
+          <div class={styles.guides}>
+            <div class={styles.judulPanduan}>
+              <h1>Panduan Penggunaan</h1>
+            </div>
+            <div class={styles.guide}>
+              <div class={styles.guideHeader} onClick={() => toggleDescription(1)}>
+                <span>1. Hubungi layanan darurat dengan memencet tombol telepon</span>
+                <img src={activeDescription() === 1 ? arrowUp : arrowDown} alt="Toggle Description" class={styles.arrowIcon} />
+              </div>
+              {activeDescription() === 1 && (
+                <div class={styles.description}>
+                  Saat terjadi keadaan darurat, langkah pertama yang harus dilakukan <br />adalah menghubungi layanan darurat. Caranya sangat mudah, cukup <br />tekan tombol telepon yang tersedia di halaman layanan.
+                </div>
+              )}
+            </div>
+            <div class={styles.guide}>
+              <div class={styles.guideHeader} onClick={() => toggleDescription(2)}>
+                <span>2. Tuliskan nama, no. telepon, lokasi, serta detail situasi kejadian</span>
+                <img src={activeDescription() === 2 ? arrowUp : arrowDown} alt="Toggle Description" class={styles.arrowIcon} />
+              </div>
+              {activeDescription() === 2 && (
+                <div class={styles.description}>
+                  Selanjutnya tuliskan nama lengkap anda beserta nomor telepon, lokasi <br />terjadinya situasi darurat, serta detail situasi kejadian. jika sudah klik <br />tombol ‘Kirim’ dan tunggu pihak layanan mengkonfirmasi.
+                </div>
+              )}
+            </div>
+            <div class={styles.guide}>
+              <div class={styles.guideHeader} onClick={() => toggleDescription(3)}>
+                <span>3. Tunggu hingga layanan darurat mengkonfirmasi laporan anda</span>
+                <img src={activeDescription() === 3 ? arrowUp : arrowDown} alt="Toggle Description" class={styles.arrowIcon} />
+              </div>
+              {activeDescription() === 3 && (
+                <div class={styles.description}>
+                  Setelah mengirimkan detail situasi darurat, laporan tersebut akan <br />diteruskan ke pihak layanan darurat dan anda hanya perlu menunggu <br />sekitar ± 5 menit untuk mendapat konfirmasi jawaban. 
+                </div>
+              )}
+            </div>
+            <div class={styles.guide}>
+              <div class={styles.guideHeader} onClick={() => toggleDescription(4)}>
+                <span>4. Pihak layanan darurat akan segera menuju ke lokasi anda</span>
+                <img src={activeDescription() === 4 ? arrowUp : arrowDown} alt="Toggle Description" class={styles.arrowIcon} />
+              </div>
+              {activeDescription() === 4 && (
+                <div class={styles.description}>
+                  Petugas layanan darurat akan menuju ke lokasi kejadian sesuai lokasi <br />yang telah anda kirimkan sebelumnya. Pastikan setelah layanan <br />dikonfirmasi, anda memencet tombol ‘Tandai telah selesai’. 
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
             </div>
           </div>
           <div class={styles.section} style={{ transform: `translateY(${(section() - 5) * -100}vh)` }}>
 
             {/* Content Section 5 */}
             <div class={styles.kontak}>
-                <h1>Kontak Kami</h1>
-                <div class={styles.container}>
-                  <div class={styles.info}>
-                    <h2>Informasi Kontak</h2>
-                    <p>Kami selalu siap mendengar dan membantu anda. Jika anda memiliki pertanyaan atau ingin memberikan masukan, jangan ragu untuk menghubungi kami melalui kontak berikut:</p>
-                    <div class={styles.contactDetail}>
-                      <div class={styles.contactItem}>
-                        <img src={infoTelepon} alt="Telepon" />
-                        <div>
-                          <h3>Telepon</h3>
-                          <p>0821-5647-8900</p>
-                          <img src={copy} alt="Copy" class={styles.copyIcon} />
-                        </div>
-                      </div>
-                      <div class={styles.contactItem}>
-                        <img src={infoEmail} alt="Email" />
-                        <div>
-                          <h3>Email</h3>
-                          <p>sentradarurat@gmail.com</p>
-                          <img src={copy} alt="Copy" class={styles.copyIcon} />
-                        </div>
-                      </div>
-                      <div class={styles.contactItem}>
-                        <img src={infoAlamat} alt="Alamat" />
-                        <div>
-                          <h3>Alamat</h3>
-                          <p>Jl. Taman Sunda Kelapa No.16, Menteng, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10310</p>
-                          <img src={copy} alt="Copy" class={styles.copyIcon} />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class={styles.form}>
-                    <h2>Hubungi Kami</h2>
-                    <p>Tulis pesan bantuan ataupun kritik & saran kepada kami disini!</p>
-                    <input type="text" placeholder="Masukkan nama.." />
-                    <input type="email" placeholder="Masukkan email.." />
-                    <textarea placeholder="Tulis pesan anda disini.." maxLength="1000"></textarea>
-                    <button type="submit">Kirim Pesan</button>
-                  </div>
+            <div class={styles.section5Content}>
+          <div class={styles.contactInfo}>
+            <h2>Informasi Kontak</h2>
+            <p>
+              Kami selalu siap mendengar dan membantu anda. Jika anda memiliki <br />pertanyaan atau ingin memberikan masukan, jangan ragu untuk <br />menghubungi kami melalui kontak berikut :
+            </p>
+            <div class={styles.contactBox1}>
+              <div class={styles.contactItem}>
+                <img src={infoTelepon} alt="Telepon" class={styles.telepon} />
+                <div>
+                  <h3>Telepon</h3>
+                  <p>0821-5647-8900</p>
                 </div>
-                <div class={styles.socialMedia}>
-                  <img src={instagram} alt="Instagram" />
-                  <img src={twitter} alt="Twitter" />
-                  <img src={facebook} alt="Facebook" />
-                  <img src={linkedin} alt="LinkedIn" />
+                <img src={copy} alt="Copy" class={styles.copyIcon} onClick={() => copyToClipboard('0821-5647-8900')} />
+              </div>
+            </div>
+            <div class={styles.contactBox2}>
+              <div class={styles.contactItem}>
+                <img src={infoEmail} alt="Email" class={styles.email} />
+                <div>
+                  <h3>Email</h3>
+                  <p>sentradarurat@gmail.com</p>
                 </div>
+                <img src={copy} alt="Copy" class={styles.copyIcon} onClick={() => copyToClipboard('sentradarurat@gmail.com')} />
+              </div>
+            </div>
+            <div class={styles.contactBox3}>
+            <div class={styles.contactItem}>
+              <img src={infoAlamat} alt="Alamat" class={styles.alamat} />
+                <div>
+                  <h3>Alamat</h3>
+                  <p>Jl. Taman Sunda Kelapa No.16, Menteng, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10310</p>
+                </div>
+                <img src={copy} alt="Copy" class={styles.copyIcon} onClick={() => copyToClipboard('Jl. Taman Sunda Kelapa No.16, Menteng, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10310')} />
+              </div>
+            </div>
+          </div>
+          <div class={styles.contactForm}>
+            <h2>Hubungi Kami</h2>
+            <p>Tulis pesan bantuan ataupun kritik & saran kepada kami disini!</p>
+            <form>
+              <input type="text" placeholder="Masukkan nama.." class={styles.input} />
+              <input type="email" placeholder="Masukkan email.." class={styles.input} />
+              <textarea placeholder="Tulis pesan anda disini.." maxLength={1000} class={styles.textarea}></textarea>
+              <button type="button" class={styles.button} onClick={() => alert('Pesan telah dikirim!')}>Kirim Pesan</button>
+            </form>
+          </div>
+        </div>
+        <div class={styles.footer}>
+          <div class={styles.footerText}>
+            © 2024 Sentra Darurat. All rights reserved.
+          </div>
+          <div class={styles.socialIcons}>
+            <img src={linkedin} alt="LinkedIn" />
+            <img src={facebook} alt="Facebook" />
+            <img src={instagram} alt="Instagram" />
+            <img src={twitter} alt="Twitter" />
+          </div>
+        </div>
               </div>
           </div>
           </div>
