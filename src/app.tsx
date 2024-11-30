@@ -5,7 +5,6 @@ import Admin from './admin';
 import LoginPopUp from './LoginPopUp';
 import RegisterPopUp from './RegisterPopUp';
 import Beranda from './beranda';
-import Panggilan from './panggilan';
 import Riwayat from './riwayat';
 
 const App: Component = () => {
@@ -16,7 +15,6 @@ const App: Component = () => {
       <Route path="/registerpopup" component={RegisterPopUp} />
       <Route path="/beranda" component={Beranda} />
       <Route path="/admin" component={Admin} />
-      <Route path="/panggilan" component={Panggilan} />
       <Route path="/riwayat" component={Riwayat} />
     </Routes>
   );
