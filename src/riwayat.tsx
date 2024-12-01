@@ -4,7 +4,6 @@ import logo from './image/logo.svg';
 import notifikasi from './image/notifikasi.svg';
 import riwayat from './image/riwayat.svg';
 import search from './image/search.svg';
-import ilustration from './image/ilustration.svg';
 
 const Riwayat: Component = () => {
     return (
